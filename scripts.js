@@ -23,7 +23,7 @@ function convertToTable() {
   const table = `<table>
 <thead>
 <tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr>
-/thead>
+</thead>
 <tbody>
 ${rows.join('\n')}
 </tbody>
