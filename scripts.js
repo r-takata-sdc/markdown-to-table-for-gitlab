@@ -1,15 +1,16 @@
 function convertToTable() {
   const inputElement = document.getElementById("input")
   const input = inputElement?.value
-  const lines = input.split('\n').filter(line => line.includes('|'));
+  const lines = input.split('\n')
   const headers = lines[0].split('|').slice(1, -1).map(header => header.trim());
   const rows = [];
 
   for (let i = 2; i < lines.length; i++) {
     const cells = lines[i].split('|').slice(1, -1).map(cell => {
       if (cell.includes('<ul><li>')) {
-        const tasks = cell.match(/<li>(.*?)<\/li>/g).map(task => task.replace(/<\/?li>/g, '').trim());
-        return `\n\n- ${tasks.map(task => `${task}`).join('\n- ')}\n\n`;
+        console.log(cell.match(/<li>(.*?)(<li>|<\/ul>)/g))
+        const tasks = cell.match(/<li>(.*?)(<li>|<\/ul>)/g).map(task => task.replace(/<\/?li>/g, '').trim());
+        return `\n\n- ${tasks.map(task => `${task}`).join('\n')}\n- [ ] NG\n\n`;
       } else {
         return cell.trim();
       }
